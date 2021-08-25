@@ -1,0 +1,22 @@
+version: 1
+
+sig:extra_pip_packages: git+https://github.com/eddienko/owl-cellranger-pipeline.git
+sig:active: true
+
+name: cellranger
+
+soft: /data/meds1_a/jimaxt/shared/cellranger/cellranger-6.0.2
+command: count
+id: SITTF9
+sample: SITTF9
+transcriptome: /data/meds1_a/jimaxt/shared/cellranger_refs/refdata-gex-mm10-2020-A
+fastqs: /data/meds1_a/jimaxt/bressandario/SLX-20946
+output_dir: /storage/admin/cellranger
+
+# extra
+extra: ["--localcores", "20", "--localmem", "64"]
+
+requirements:
+  workers: 1
+  threads: 25
+  memory: 64
