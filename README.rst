@@ -34,6 +34,6 @@ An example pipeline definition file is:
     extra: ["--localcores", "20", "--localmem", "64"]
 
     requirements:
-    workers: 1
-    threads: 25
-    memory: 64
+      workers: 1
+      threads: 25
+      memory: 64
