@@ -1,5 +1,6 @@
 import logging
 import subprocess
+from contextlib import suppress
 from pathlib import Path
 from typing import List
 
@@ -27,6 +28,9 @@ def main(**kwargs):
     command = kwargs.pop("command")
     output_dir = kwargs.pop("output_dir")
     extra = kwargs.pop("extra", [])
+
+    with suppress(Exception):
+        (output_dir / kwargs.get("sample", kwargs["id"]) / "_lock").unlink()
 
     cmd = [f"{soft}", command]
     for k, v in kwargs.items():
