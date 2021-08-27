@@ -4,6 +4,7 @@ from contextlib import suppress
 from pathlib import Path
 from typing import List
 
+import dask
 from distributed import Client
 
 logger = logging.getLogger("owl.daemon.pipeline")
@@ -43,7 +44,8 @@ def main(**kwargs):
     logger.debug("Command %s", cmd)
 
     client = Client.current()
-    fut = client.submit(run_cellranger, cmd, output_dir)
+    with dask.annotate(executor="processes", retries=2):
+        fut = client.submit(run_cellranger, cmd, output_dir)
     res = client.gather(fut)
 
     if res.returncode == 0:
